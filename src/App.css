@@ -63,6 +63,21 @@
   font-size: 14px;
 }
 
+.status {
+  background-color: white;
+  border: 1px solid #d5dde5;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  color: gray;
+}
+
+.status-error {
+  color: #c0392b;
+  border-color: #f1c4bf;
+  background-color: #fdf0ee;
+}
+
 @media (max-width: 600px) {
   .header {
     padding: 20px;

@@ -1,13 +1,20 @@
 import "./App.css";
 import { Header } from "./components/header";
 import { PostList } from "./components/postList";
-import { posts } from "./data/posts";
+import { useGetPostsQuery } from "./api/baseApi";
+
 
 function App() {
+    const { data: posts, isLoading, isError } = useGetPostsQuery()
+
     return (
         <div className="app">
             <Header title="Назва форуму" description="Короткий опис форуму"/>
-            <PostList posts={posts}/>
+
+            {isLoading && <p className="status">Завантаження постів</p>}
+            {isError && <p className="status status-error">Не вдалося завантажити постии</p>}
+            {posts && posts.length === 0 && <p className="status">Постів поки немає</p>}
+            {posts && posts.length > 0 && <PostList posts={posts}/>}
         </div>
     )
 }

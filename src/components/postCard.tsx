@@ -8,7 +8,7 @@ export function PostCard({post}: PostCardProps){
     return (
         <div className="post-card">
             <div className="post-top">
-                <span className="post-category">{post.category}</span>
+                <span className="post-category">{post.category?.name ?? "Без категорії"}</span>
             </div>
 
             <div className="post-body">
@@ -17,7 +17,7 @@ export function PostCard({post}: PostCardProps){
             </div>
 
             <div className="post-bottom">
-                <span className="post-author">{post.author}</span>
+                <span className="post-author">{post.author?.email ?? "Невідомий автор"}</span>
             </div>
         </div>
     )
