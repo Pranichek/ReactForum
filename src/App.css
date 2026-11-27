@@ -1,159 +1,306 @@
 .app {
-  max-width: 700px;
-  margin: auto;
+  --ink: #1b2230;
+  --muted: #596672;
+  --border: #d7dfe4;
+  --surface: #fff;
+  --accent: #28674f;
+  --focus: #23795d;
+  --error: #a53229;
+
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 740px;
+  margin: 0 auto;
   padding: 20px;
+  color: var(--ink);
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.app *,
+.app *::before,
+.app *::after {
+  box-sizing: inherit;
 }
 
 .header {
-  background-color: #18212b;
-  color: white;
-  padding: 30px;
-  border-radius: 12px;
-  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  align-items: start;
-  justify-content: space-between;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 20px;
+  padding: 30px;
+  border-radius: 14px;
+  background: #1b2230;
+  color: #fff;
 }
 
 .header-title {
-  font-size: 32px;
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.2;
 }
 
 .header-description {
-  color: #b8c4d0;
+  margin: 0;
+  color: #c3cdd6;
 }
 
 .post-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.post-card {
-  background-color: white;
-  border: 1px solid #d5dde5;
-  border-radius: 12px;
+.post-card,
+.form-block,
+.status,
+.me {
+  min-width: 0;
   padding: 20px;
-}
-
-.post-card:hover {
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
 }
 
 .post-category {
-  background-color: #dcf1ec;
-  color: green;
-  font-size: 13px;
+  display: inline-block;
   padding: 3px 10px;
-  border-radius: 10px;
-}
-
-.post-body {
-  margin: 12px 0;
+  border-radius: 999px;
+  background: #e0f2eb;
+  color: var(--accent);
+  font-size: 0.8125rem;
+  font-weight: 600;
 }
 
 .post-title {
-  font-size: 20px;
-  margin-bottom: 5px;
+  margin: 12px 0 6px;
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+.post-body {
+  margin: 8px 0 14px;
 }
 
 .post-author {
-  color: gray;
-  font-size: 14px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.status,
+.me {
+  margin: 0 0 20px;
 }
 
 .status {
-  background-color: white;
-  border: 1px solid #d5dde5;
-  border-radius: 12px;
-  padding: 20px;
+  color: var(--muted);
   text-align: center;
-  color: gray;
 }
 
 .status-error {
-  color: #c0392b;
-  border-color: #f1c4bf;
-  background-color: #fdf0ee;
+  border-color: #edc0ba;
+  background: #fdf2f0;
+  color: var(--error);
 }
 
 .auth {
-  display: flex;
-  gap: 15px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
   margin-bottom: 20px;
-}
-
-.form-block {
-  flex: 1;                     
-  background-color: white;
-  border: 1px solid #d5dde5;
-  border-radius: 12px;
-  padding: 20px;
 }
 
 .form-title {
-  font-size: 18px;
-  margin-bottom: 12px;
+  margin: 0 0 12px;
+  font-size: 1.125rem;
 }
 
-.form-data {
-  display: flex;
-  flex-direction: column;
+.form-data,
+.section-comments form {
+  display: grid;
   gap: 10px;
 }
 
-.form-data input {
+.form-data input,
+.section-comments textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
   padding: 10px 12px;
-  border: 1px solid #d5dde5;
+  border: 1px solid #939fa8;
   border-radius: 8px;
-  font-size: 15px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
 }
 
-.form-data input:focus {
-  outline: none;
-  border-color: #18212b;
-}
-
-.send-btn {
-  background-color: #18212b;
-  color: white;
-  border: none;
+.send-btn,
+.section-comments button[type="submit"] {
+  min-height: 42px;
+  padding: 9px 16px;
+  border: 0;
   border-radius: 8px;
-  padding: 10px;
-  font-size: 15px;
+  background: #1b2230;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
   cursor: pointer;
 }
 
-.send-btn:hover {
-  background-color: #2c3a48;
+.send-btn:hover:not(:disabled),
+.section-comments button[type="submit"]:hover:not(:disabled) {
+  background: #303e50;
 }
 
-.form-error {
-  color: #c0392b;
-  font-size: 14px;
-  margin: -4px 0 0;
+.app button:disabled {
+  opacity: 0.6;
+  cursor: default;
 }
 
-.me {
-  background-color: white;
-  border: 1px solid #d5dde5;
-  border-radius: 12px;
-  padding: 16px 20px;
-  margin-bottom: 20px;
+.app :where(input, textarea, button, a):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.form-error,
+.error-message {
+  margin: 0;
+  color: var(--error);
+  font-size: 0.875rem;
+}
+
+/* Комментарии */
+
+.section-comments {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8e6;
+}
+
+.section-comments > div {
+  display: grid;
+  gap: 12px;
+}
+
+.section-comments > div > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.section-comments > div > .error-message {
+  color: var(--error);
+}
+
+.section-comments ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.section-comments li {
+  min-width: 0;
+  padding: 12px 16px;
+  border: 1px solid #dce8e2;
+  border-inline-start: 3px solid #80b8a2;
+  border-radius: 10px;
+  background: #f5f9f7;
+  color: var(--ink);
+}
+
+/* Отступ работает и в разметке <strong>Имя</strong>Дата. */
+.section-comments li :where(strong, b, .comment-author) {
+  margin-inline-end: 12px;
+  color: #253c32;
+  font-size: 0.9375rem;
+  font-weight: 650;
+}
+
+.comment-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 3px 12px;
+}
+
+/* Внутри .comment-meta расстояние уже задаёт gap. */
+.section-comments .comment-meta > :where(strong, b, .comment-author) {
+  margin-inline-end: 0;
+}
+
+.section-comments li time,
+.comment-date {
+  color: #586a61;
+  font-size: 0.8125rem;
+  font-weight: 400;
+}
+
+.section-comments li p,
+.comment-text {
+  margin: 6px 0 0;
+  color: #26332d;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.section-comments li button {
+  margin-top: 8px;
+  padding: 4px 8px;
+  border: 1px solid #e5c9c5;
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--error);
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.section-comments li button:hover:not(:disabled) {
+  background: #fff2ef;
+}
+
+.section-comments textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+
+.section-comments button[type="submit"] {
+  justify-self: start;
 }
 
 @media (max-width: 600px) {
+  .app {
+    padding: 12px;
+  }
+
   .header {
     padding: 20px;
   }
 
   .header-title {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
 
-  .post-card {
+  .auth {
+    grid-template-columns: 1fr;
+  }
+
+  .post-card,
+  .form-block,
+  .status,
+  .me {
     padding: 15px;
-    /* background-color: green; */
+  }
+
+  .section-comments li {
+    padding: 10px 12px;
   }
 }

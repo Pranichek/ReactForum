@@ -1,10 +1,11 @@
 import type { Post } from "../types/posts";
+import { CommentsSection } from "./CommentsSection"; 
 
-interface PostCardProps{
-    post: Post
+interface PostCardProps {
+    post: Post;
 }
 
-export function PostCard({post}: PostCardProps){
+export function PostCard({ post }: PostCardProps) {
     return (
         <div className="post-card">
             <div className="post-top">
@@ -19,6 +20,8 @@ export function PostCard({post}: PostCardProps){
             <div className="post-bottom">
                 <span className="post-author">{post.author?.email ?? "Невідомий автор"}</span>
             </div>
+
+            <CommentsSection postId={post.id} />
         </div>
-    )
+    );
 }

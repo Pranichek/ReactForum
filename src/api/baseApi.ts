@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { Post } from "../types/posts";
 import type { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, User } from "../types/user";
+import type { Comment, CreateCommentRequest , DeleteCommentRequest} from "../types/comment";
 
 
 export const baseAPI = createApi({
@@ -9,7 +10,7 @@ export const baseAPI = createApi({
         baseUrl: 'http://localhost:3000',
         credentials: "include",
     }),
-    tagTypes: ["Me"],
+    tagTypes: ["Me", "Comments"],
     endpoints: (builder) => ({
         getPosts: builder.query<Post[], void>({
             query: () => '/posts'
@@ -32,8 +33,36 @@ export const baseAPI = createApi({
         getMe: builder.query<User, void>({
             query: () => "/auth/me",
             providesTags: ["Me"]
-        })
-    })
+        }),
+        getComments: builder.query<Comment[], number>({
+            query: (postId) => `/posts/${postId}/comments`,
+            providesTags: ["Comments"]
+        }),
+        createComment: builder.mutation<Comment, CreateCommentRequest>({
+            query: ({ postId, content }) => ({
+                url: `/posts/${postId}/comments`,
+                method: "POST",
+                body: { content }
+            }),
+            invalidatesTags: ["Comments"]
+        }),
+        deleteComment: builder.mutation<void, DeleteCommentRequest> ({
+            query: ({ commentId }) => ({
+                url: `/comments/${commentId}`,
+                method: "DELETE"
+            }),
+            invalidatesTags: ["Comments"] 
+        }),
+
+    })  
 })
 
-export const { useGetPostsQuery, useRegisterMutation, useLoginMutation, useGetMeQuery } = baseAPI
+export const { 
+    useGetPostsQuery, 
+    useRegisterMutation, 
+    useLoginMutation, 
+    useGetMeQuery,
+    useGetCommentsQuery,
+    useCreateCommentMutation,
+    useDeleteCommentMutation
+} = baseAPI
